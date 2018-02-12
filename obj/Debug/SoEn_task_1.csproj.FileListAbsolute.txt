@@ -1,0 +1,2 @@
+C:\Users\asustud\Desktop\SoEn_task_1\SoEn_task_1\bin\Debug\SoEn_task_1.exe.config
+C:\Users\asustud\Desktop\SoEn_task_1\SoEn_task_1\obj\Debug\SoEn_task_1.csprojResolveAssemblyReference.cache
