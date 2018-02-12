@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace SoEn_task_1
 {
-    class Cell
+    public class Cell
     {
         
 
-        public static enum conditionsList : int { simpleCell = 0, enter = 1, exit = -1 }
+        public enum conditionsList : int { simpleCell = 0, enter = 1, exit = -1 }
 
         public bool canGoNorth;
         public bool canGoSouth;
@@ -27,13 +27,14 @@ namespace SoEn_task_1
         public string encrypt()
         {
             var res = 
-                ((canGoNorth ? 1 : 0) << 3) &
-                ((canGoSouth ? 1 : 0) << 2) &
-                ((canGoWest ? 1 : 0) << 1) &
-                ((canGoEast ? 1: 0));
+                ((canGoNorth ? 1 : 0) ) |
+                ((canGoSouth ? 1 : 0) << 1) |
+                ((canGoWest ? 1 : 0) << 2) |
+                ((canGoEast ? 1: 0) << 3);
 
             Console.WriteLine(res);
-            return ('0'+res).ToString();
+            var ans = ((char) ('0' + res)).ToString();
+            return ans;
         }
 
 
