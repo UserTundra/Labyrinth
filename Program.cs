@@ -11,9 +11,8 @@ namespace SoEn_task_1
         static void Main(string[] args)
         {
 
-            var el = new Cell();
-            el.canGoNorth = true;
-            el.encrypt();
+            var app = new Application();
+            app.run();
 
         }
     }
