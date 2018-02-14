@@ -8,13 +8,26 @@ namespace SoEn_task_1
 {
     public class Labyrinth
     {
-        public List<List<Cell>> circuit { get; set; }
+        public List<List<Cell>> _circuit;
+        public List<List<Cell>> circuit
+        {
+            get
+            {
+                if (_circuit == null)
+                    _circuit = new List<List<Cell>>();
+                return _circuit;
+            }
+            set { _circuit = value; }
+        }
+
 
         public Labyrinth(int width, int height)
         {
 
         }
         public Labyrinth() { }
+
+        
 
         public string encode()
         {
