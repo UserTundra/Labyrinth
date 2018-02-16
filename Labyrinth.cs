@@ -33,10 +33,10 @@ namespace SoEn_task_1
             _circuit.Add(new List<Cell>());
         }
 
-        private void generate(String enterTrip)
+        public void generate(String enterTrip)
         {
             
-            if (circuit[0].Count < 0)
+            if (circuit[0].Count == 0)
             {
                 int i = 0;
                 int j = 0;
@@ -45,43 +45,75 @@ namespace SoEn_task_1
                 var input = new Cell() { condition = (int) Cell.conditionsList.enter };
                 circuit[0].Add(input);
                 enterTrip = enterTrip.Substring(1);
-                step(enterTrip, i, j, idx, idy);
+                Point2D oldCoord = new Point2D(i, j);
+                Point2D coordIncr = new Point2D(idx, idy);
+                step(enterTrip, oldCoord, coordIncr);
+                
             }
                 
         }
 
-        private void step(String trip, int i, int j, int idx, int idy)
+        private void step(String trip, Point2D oldCoords, Point2D coordsIncrement)
         {
+            if(trip.Length == 0)
+                return;
+
             while (trip[0] != 'W')
             {
                 
                 if(trip[0] == 'L')
                 {
                     //circuit[i][j].c TODO canMovelalalala..
-                    int tmp = idx;
-                    idx = idy * -1;
-                    idy = tmp;
+                    //circuit[oldCoords.x][oldCoords.y].moveLeft(oldCoords, coordsIncrement);
+
+                    int tmp = coordsIncrement.x;
+                    coordsIncrement.x = coordsIncrement.y * -1;
+                    coordsIncrement.y = tmp;
                 }
                 else if(trip[0] == 'R')
                 {
-                    int tmp = idy;
-                    idy = idx * -1;
-                    idx = tmp;
+                    //circuit[oldCoords.x][oldCoords.y].moveRight(oldCoords, coordsIncrement);
+
+                    int tmp = coordsIncrement.y;
+                    coordsIncrement.y = coordsIncrement.x * -1;
+                    coordsIncrement.x = tmp;
                 }
                 trip = trip.Substring(1);
             }
 
-            i = i + idx;
-            j = j + idy;
+            if (trip.Length == 1)
+                return;
+
+            oldCoords.x = oldCoords.x + coordsIncrement.x;// x = i
+            oldCoords.y = oldCoords.y + coordsIncrement.y;
             Cell counter;
-            if(i < 0 )
+            while(oldCoords.x < 0)
+            {
+                oldCoords.x += 1;
+                circuit.Insert(0, new List<Cell>());
+            }
+            while (oldCoords.x > circuit.Count - 1)
             {
                 circuit.Add(new List<Cell>());
-                counter = new Cell();
-
-                circuit[circuit.Count - 1].Add(counter);
             }
 
+            while(oldCoords.y > circuit[oldCoords.x].Count-1 )
+            {
+                
+                counter = new Cell();   
+                circuit[oldCoords.x].Add(counter);
+            }
+            while(oldCoords.y < 0)
+            {
+                oldCoords.y += 1;
+                counter = new Cell();
+                circuit[oldCoords.x].Insert(0, counter);
+            }
+
+            circuit[oldCoords.x][oldCoords.y].moveForvard(oldCoords, coordsIncrement);
+
+            trip = trip.Substring(1);
+            step(trip, oldCoords, coordsIncrement);
 
 
         }

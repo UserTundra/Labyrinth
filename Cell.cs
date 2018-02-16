@@ -13,6 +13,8 @@ namespace SoEn_task_1
 
         public enum conditionsList : int { simpleCell = 0, enter = 1, exit = -1 }
         
+        //public static Dictionary<Point2D,>
+
         public bool canGoNorth;
         public bool canGoSouth;
         public bool canGoWest;
@@ -22,7 +24,29 @@ namespace SoEn_task_1
         
         public Cell()
         {
+            canGoEast = true;
+            canGoNorth = true;
+            canGoSouth = true;
+            canGoWest = true;
             this.condition = (int) Cell.conditionsList.simpleCell;
+        }
+
+        public void moveLeft(Point2D oldCoord)
+        {
+            if(oldCoord.x == 0 && oldCoord.y == 1)
+            {
+
+            }
+        }
+
+        public void moveRight(Point2D oldCoord, Point2D newCoord)
+        {
+
+        }
+
+        public void moveForvard(Point2D oldCoord, Point2D newCoord)
+        {
+
         }
 
         public string encrypt()

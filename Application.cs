@@ -27,11 +27,14 @@ namespace SoEn_task_1
 
             var n = int.Parse(possibleLabyryths[0]); // not important arg
 
-            foreach (var el in possibleLabyryths)
+            for(int i = 1;i < possibleLabyryths.Length; i++ )
             {
-                var roads = el.Split(' ');
+                var roads = possibleLabyryths[i].Split(' ');
                 // invoke ( road[0],road[1])
                 //TODO: call func to construct
+                var lab = new Labyrinth();
+                lab.generate(roads[0]);
+                sw.Write(lab.encode());
                 sw.Write("\n");
             }
         }
