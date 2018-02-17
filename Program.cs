@@ -12,7 +12,7 @@ namespace SoEn_task_1
         {
 
             var app = new Application();
-            app.run();
+            app.Run();
 
         }
     }

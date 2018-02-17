@@ -19,9 +19,23 @@ namespace SoEn_task_1
             this.y = y;
         }
 
-        public Point2D copy()
+        public Point2D Copy()
         {
             return new Point2D(this.x, this.y);
+        }
+
+        public void MoveLeft()
+        {
+            int tmp = this.x;
+            this.x = this.y * -1;
+            this.y = tmp;
+        }
+
+        public void MoveRight()
+        {
+            int tmp = this.y;
+            this.y = this.x * -1;
+            this.x = tmp;
         }
         
     }

@@ -9,12 +9,8 @@ namespace SoEn_task_1
     
     public class Cell
     {
-        
-
         public enum conditionsList : int { simpleCell = 0, enter = 1, exit = -1 }
         
-        //public static Dictionary<Point2D,>
-
         public bool canGoNorth;
         public bool canGoSouth;
         public bool canGoWest;
@@ -31,7 +27,7 @@ namespace SoEn_task_1
             this.condition = (int) Cell.conditionsList.simpleCell;
         }
 
-        public void fillFields(Point2D coord)
+        public void FillFields(Point2D coord) // take the vector and block the side
         {
             if(coord.x == 1 && coord.y == 0)
                 canGoSouth = false;
@@ -43,40 +39,31 @@ namespace SoEn_task_1
                 canGoWest = false;
         }
         
-
-        public void moveRight(Point2D _oldCoords)
+        public void MoveRight(Point2D _oldCoords)
         {
-            Point2D oldCoords = _oldCoords.copy();
+            Point2D oldCoords = _oldCoords.Copy();
+            FillFields(oldCoords); // block forward
 
-            fillFields(oldCoords); // block forward
-
-            int tmp = oldCoords.x; // get left side
-            oldCoords.x = oldCoords.y * -1;
-            oldCoords.y = tmp;
-
-            fillFields(oldCoords); // block left
-            
+            oldCoords.MoveLeft();
+            FillFields(oldCoords); // block left
         }
 
-        public void moveForvard(Point2D _oldCoords)
+        public void MoveForvard(Point2D _oldCoords)
         {
-            Point2D oldCoords = _oldCoords.copy();
-            int tmp = oldCoords.x;
-            oldCoords.x = oldCoords.y * -1;
-            oldCoords.y = tmp;
-
-            fillFields(oldCoords);
+            Point2D oldCoords = _oldCoords.Copy();
+            oldCoords.MoveLeft();
+            FillFields(oldCoords); // block left side
         }
 
-        public string encrypt()
+        public string Encrypt()
         {
             var res = 
                 ((canGoNorth ? 1 : 0) ) |
                 ((canGoSouth ? 1 : 0) << 1) |
                 ((canGoWest ? 1 : 0) << 2) |
                 ((canGoEast ? 1: 0) << 3); // take index and let answer
+
             string encode = "0123456789abcdef";
-            
             return encode[res].ToString();
         }
 

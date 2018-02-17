@@ -20,7 +20,7 @@ namespace SoEn_task_1
             sr = new StreamReader("test.txt");
         }
 
-        public void parseFile()
+        public void ParseFile()
         {
             var allText = sr.ReadToEnd();
             var possibleLabyryths = allText.Split('\n');
@@ -29,22 +29,27 @@ namespace SoEn_task_1
 
             for(int i = 1;i < possibleLabyryths.Length; i++ )
             {
-                var roads = possibleLabyryths[i].Split(' ');
-                // invoke ( road[0],road[1])
-                //TODO: call func to construct
-                var lab = new Labyrinth();
-                lab.generate(roads[0],roads[1]);
-                sw.Write(lab.encode());
-                sw.Write("\n");
+                try { 
+                    var roads = possibleLabyryths[i].Split(' ');
+                    var lab = new Labyrinth();
+                    lab.Generate(roads[0],roads[1]);
+                    sw.Write(lab.Encode());
+                    sw.Write("\n");
+                }
+                catch(Exception e)
+                {
+                    //TODO log
+                    continue;
+                }
             }
         }
 
 
 
-        public void run()
+        public void Run()
         {
             StreamInit();
-            parseFile();    
+            ParseFile();    
 
 
         }
