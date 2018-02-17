@@ -19,7 +19,10 @@ namespace SoEn_task_1
             this.y = y;
         }
 
-        
+        public Point2D copy()
+        {
+            return new Point2D(this.x, this.y);
+        }
         
     }
 }

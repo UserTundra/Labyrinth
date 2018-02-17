@@ -31,22 +31,41 @@ namespace SoEn_task_1
             this.condition = (int) Cell.conditionsList.simpleCell;
         }
 
-        public void moveLeft(Point2D oldCoord)
+        public void fillFields(Point2D coord)
         {
-            if(oldCoord.x == 0 && oldCoord.y == 1)
-            {
+            if(coord.x == 1 && coord.y == 0)
+                canGoSouth = false;
+            if (coord.x == 0 && coord.y == 1)
+                canGoEast = false;
+            if (coord.x == -1 && coord.y == 0)
+                canGoNorth = false;
+            if (coord.x == 0 && coord.y == -1)
+                canGoWest = false;
+        }
+        
 
-            }
+        public void moveRight(Point2D _oldCoords)
+        {
+            Point2D oldCoords = _oldCoords.copy();
+
+            fillFields(oldCoords); // block forward
+
+            int tmp = oldCoords.x; // get left side
+            oldCoords.x = oldCoords.y * -1;
+            oldCoords.y = tmp;
+
+            fillFields(oldCoords); // block left
+            
         }
 
-        public void moveRight(Point2D oldCoord, Point2D newCoord)
+        public void moveForvard(Point2D _oldCoords)
         {
+            Point2D oldCoords = _oldCoords.copy();
+            int tmp = oldCoords.x;
+            oldCoords.x = oldCoords.y * -1;
+            oldCoords.y = tmp;
 
-        }
-
-        public void moveForvard(Point2D oldCoord, Point2D newCoord)
-        {
-
+            fillFields(oldCoords);
         }
 
         public string encrypt()
@@ -55,10 +74,10 @@ namespace SoEn_task_1
                 ((canGoNorth ? 1 : 0) ) |
                 ((canGoSouth ? 1 : 0) << 1) |
                 ((canGoWest ? 1 : 0) << 2) |
-                ((canGoEast ? 1: 0) << 3);
-            Console.WriteLine(res);
-            var ans = ((char) ('0' + res)).ToString();
-            return ans;
+                ((canGoEast ? 1: 0) << 3); // take index and let answer
+            string encode = "0123456789abcdef";
+            
+            return encode[res].ToString();
         }
 
         

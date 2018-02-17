@@ -33,7 +33,7 @@ namespace SoEn_task_1
                 // invoke ( road[0],road[1])
                 //TODO: call func to construct
                 var lab = new Labyrinth();
-                lab.generate(roads[0]);
+                lab.generate(roads[0],roads[1]);
                 sw.Write(lab.encode());
                 sw.Write("\n");
             }
