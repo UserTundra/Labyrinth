@@ -11,7 +11,10 @@ namespace SoEn_task_1
         private List<List<Cell>> _circuit;
         private Point2D _exitPoint;
         private Point2D _exitVector;
-        
+
+        private int _width = 1;
+        private int _height =1;
+
         public List<List<Cell>> circuit
         {
             get
@@ -20,7 +23,7 @@ namespace SoEn_task_1
                     Init();
                 return _circuit;
             }
-            set { _circuit = value; }
+            
         }
 
 
@@ -63,31 +66,50 @@ namespace SoEn_task_1
             Step(backTrip, _exitPoint, _exitVector);
         }
 
+        private void insertCollumn(int idx = 0)
+        {
+            foreach (var el in circuit)
+            {
+                el.Insert(idx, new Cell());
+            }
+
+            
+        }
+
+        private void insertRow(int idx = 0)
+        {
+            
+            var node = new List<Cell>();
+                for (int i = 0; i<_width; i++)
+                {
+                    node.Add(new Cell());
+                }
+            circuit.Insert(idx, node);
+            
+        }
+
         private void AddNewCell(Point2D oldCoords)
         {
-
-            Cell counter;
             while (oldCoords.x < 0)
             {
-                oldCoords.x += 1;
-                circuit.Insert(0, new List<Cell>());
+                insertRow(0);
+                oldCoords.x++;
             }
             while (oldCoords.x > circuit.Count - 1)
             {
-                circuit.Add(new List<Cell>());
+                insertRow(circuit.Count);
             }
-
             while (oldCoords.y > circuit[oldCoords.x].Count - 1)
             {
-                counter = new Cell();
-                circuit[oldCoords.x].Add(counter);
+                insertCollumn(circuit[oldCoords.x].Count);
             }
             while (oldCoords.y < 0)
             {
-                oldCoords.y += 1;
-                counter = new Cell();
-                circuit[oldCoords.x].Insert(0, counter);
+                insertCollumn(0);
+                oldCoords.y++;
             }
+            _height = Math.Max(_height, circuit.Count);
+            _width = Math.Max(_width, circuit[0].Count);
         }
         
 
@@ -114,6 +136,9 @@ namespace SoEn_task_1
                 trip = trip.Substring(1);
             }
 
+            if (!areTurned)
+                circuit[oldCoords.x][oldCoords.y].MoveForvard(coordsIncrement);
+
             if (trip.Length == 1) // if exit
             {
                 circuit[oldCoords.x][oldCoords.y].condition = (int)Cell.conditionsList.exit;
@@ -122,8 +147,7 @@ namespace SoEn_task_1
                 return;
             }
 
-            if (!areTurned)
-                circuit[oldCoords.x][oldCoords.y].MoveForvard(coordsIncrement);
+            
 
             oldCoords.x = oldCoords.x + coordsIncrement.x;// x = i
             oldCoords.y = oldCoords.y + coordsIncrement.y;

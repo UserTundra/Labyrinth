@@ -27,12 +27,14 @@ namespace SoEn_task_1
 
             var n = int.Parse(possibleLabyryths[0]); // not important arg
 
-            for(int i = 1;i < possibleLabyryths.Length; i++ )
+            for(int i = 0;i < possibleLabyryths.Length; i++ )
             {
                 try { 
                     var roads = possibleLabyryths[i].Split(' ');
                     var lab = new Labyrinth();
                     lab.Generate(roads[0],roads[1]);
+
+                    sw.WriteLine("Case #"+i);
                     sw.Write(lab.Encode());
                     sw.Write("\n");
                 }
