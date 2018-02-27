@@ -6,3 +6,9 @@ C:\учеба\C# MVC\Labyrinth\bin\Debug\SoEn_task_1.pdb
 C:\учеба\C# MVC\Labyrinth\obj\Debug\SoEn_task_1.csprojResolveAssemblyReference.cache
 C:\учеба\C# MVC\Labyrinth\obj\Debug\SoEn_task_1.exe
 C:\учеба\C# MVC\Labyrinth\obj\Debug\SoEn_task_1.pdb
+C:\Users\Дарья\Documents\Visual Studio 2015\Projects\Labyrinth\bin\Debug\SoEn_task_1.exe.config
+C:\Users\Дарья\Documents\Visual Studio 2015\Projects\Labyrinth\obj\Debug\SoEn_task_1.exe
+C:\Users\Дарья\Documents\Visual Studio 2015\Projects\Labyrinth\obj\Debug\SoEn_task_1.pdb
+C:\Users\Дарья\Documents\Visual Studio 2015\Projects\Labyrinth\bin\Debug\SoEn_task_1.exe
+C:\Users\Дарья\Documents\Visual Studio 2015\Projects\Labyrinth\bin\Debug\SoEn_task_1.pdb
+C:\Users\Дарья\Documents\Visual Studio 2015\Projects\Labyrinth\obj\Debug\SoEn_task_1.csprojResolveAssemblyReference.cache
