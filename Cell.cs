@@ -28,27 +28,27 @@ namespace SoEn_task_1
         }
 
         public void FillFields(Point2D coord) // take the vector and block the side
-        {
-            if(coord.x == 1 && coord.y == 0)
-                canGoSouth = false;
-            if (coord.x == 0 && coord.y == 1)
-                canGoEast = false;
-            if (coord.x == -1 && coord.y == 0)
+        {                                     //движение по сторонам; изменение позиций стен
+            if (coord.x == 1 && coord.y == 0)           //00 01 02
+                canGoSouth = false;                     //10 11 12
+            if (coord.x == 0 && coord.y == 1)           //20 21 22
+                canGoEast = false;                      //т.е. если вектор изменился на определенный х, у, значит где-то стена
+            if (coord.x == -1 && coord.y == 0)          //прим. движение вверх есть, нет движения в стороны => т.е. стена сверху
                 canGoNorth = false;
             if (coord.x == 0 && coord.y == -1)
                 canGoWest = false;
         }
         
-        public void MoveRight(Point2D _oldCoords)
+        public void MoveRight(Point2D _oldCoords) //при повороте из клетки направо: стена спереди и слева
         {
             Point2D oldCoords = _oldCoords.Copy();
-            FillFields(oldCoords); // block forward
+            FillFields(oldCoords); // block forward - а тут стена спереди, и так всегда
 
-            oldCoords.MoveLeft();
+            oldCoords.MoveLeft(); //стена слева
             FillFields(oldCoords); // block left
         }
 
-        public void MoveForvard(Point2D _oldCoords)
+        public void MoveForvard(Point2D _oldCoords) //при движении вперед стена только слева
         {
             Point2D oldCoords = _oldCoords.Copy();
             oldCoords.MoveLeft();
