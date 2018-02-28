@@ -27,7 +27,7 @@ namespace SoEn_task_1
 
             var n = int.Parse(possibleLabyryths[0]); // not important arg
 
-            for(int i = 0;i < possibleLabyryths.Length; i++ )
+            for(int i = 1;i < possibleLabyryths.Length; i++ )
             {
                 try { 
                     var roads = possibleLabyryths[i].Split(' ');
@@ -38,9 +38,9 @@ namespace SoEn_task_1
                     sw.Write(lab.Encode());
                     sw.Write("\n");
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
-                    //TODO log
+                    Console.WriteLine("error", e);
                     continue;
                 }
             }

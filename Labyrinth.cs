@@ -70,7 +70,7 @@ namespace SoEn_task_1
         {
             foreach (var el in circuit)
             {
-                el.Insert(idx, new Cell());
+                     el.Insert(idx, new Cell());
             }
         }
 
@@ -118,7 +118,7 @@ namespace SoEn_task_1
 
             bool areTurned = false;
 
-            while (trip[0] != 'W')
+            while (trip.Length > 0 && trip[0] != 'W' )
             {
                 areTurned = true;
                 if(trip[0] == 'L')
