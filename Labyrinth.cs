@@ -166,7 +166,7 @@ namespace SoEn_task_1
                 {
                     ans += el.Encrypt();
                 }
-                ans += "\n";
+                ans += "\r\n";
             }
             return ans;
         }
