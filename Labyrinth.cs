@@ -9,8 +9,6 @@ namespace SoEn_task_1
     public class Labyrinth
     {
         private List<List<Cell>> _circuit;
-        private Point2D _exitPoint; //координаты выхода
-        private Point2D _exitVector; //"сторона", куда выходим
 
         private int _width = 1;
         private int _height =1;
@@ -39,34 +37,9 @@ namespace SoEn_task_1
             _circuit.Add(new List<Cell>());
         }
 
-        public void Generate(String enterTrip, String exitTrip)
-        {
-            if (circuit[0].Count == 0) //если лабиринт пуст
-            {
-                var input = new Cell() { condition = (int) Cell.conditionsList.enter }; //объявляем ячейку входа
-                circuit[0].Add(input); //добавляем ее в лабиринт
-                enterTrip = enterTrip.Substring(1); //убираем первую букву из последовательности, т.к. она - вход
+        
 
-                Point2D oldCoord = new Point2D(0, 0); //координата входа - одна строка и один элемент
-                Point2D coordIncr = new Point2D(1, 0); //направление движения; вход на верхней стороне, т.е. всегда двигаемся вниз; х +1, у +0
-
-                Step(enterTrip, oldCoord, coordIncr); //проходится по последовательности
-                Backwards(exitTrip); //проходится по последовательности наоборот
-            }
-        }
-
-        private void Backwards(string backTrip) //если выхода нет, то и идти некуда
-        {
-            if (_exitPoint == null || _exitVector == null)
-            {
-                Console.WriteLine("NO EXIT!");
-                return; 
-            }
-            backTrip = backTrip.Substring(1); //на обратной дороге убираем первую букву
-            Step(backTrip, _exitPoint, _exitVector);
-        }
-
-        private void insertCollumn(int idx = 0) //вставка колонки по индексу
+        public void insertCollumn(int idx = 0) //вставка колонки по индексу
         {
             foreach (var el in circuit)
             {
@@ -74,7 +47,7 @@ namespace SoEn_task_1
             }
         }
 
-        private void insertRow(int idx = 0) //вставка строки по индексу
+        public void insertRow(int idx = 0) //вставка строки по индексу
         {
             
             var node = new List<Cell>();
@@ -86,7 +59,7 @@ namespace SoEn_task_1
             
         }
 
-        private void AddNewCell(Point2D oldCoords) //добавление новой ячейки
+        public void AddNewCell(Point2D oldCoords) //добавление новой ячейки
         {
             while (oldCoords.x < 0) //т.е. если вдруг (?!) от входа можно идти наверх (!?), то вставляем строку выше текущей
             {
@@ -110,52 +83,6 @@ namespace SoEn_task_1
             _width = Math.Max(_width, circuit[0].Count);
         }
         
-
-        private void Step(String trip, Point2D oldCoords, Point2D coordsIncrement)
-        {
-            if(trip.Length == 0)
-                return;
-
-            bool areTurned = false;
-
-            while (trip.Length > 0 && trip[0] != 'W' )
-            {
-                areTurned = true;
-                if(trip[0] == 'L')
-                {
-                    coordsIncrement.MoveLeft();
-                }
-                else if(trip[0] == 'R')
-                {
-                    circuit[oldCoords.x][oldCoords.y].MoveRight(coordsIncrement);
-                    coordsIncrement.MoveRight();
-                }
-                //TODO else{ throw new UnsupportedCharException()}
-                trip = trip.Substring(1);
-            }
-
-            if (!areTurned)
-                circuit[oldCoords.x][oldCoords.y].MoveForvard(coordsIncrement);
-
-            if (trip.Length == 1) // if exit
-            {
-                circuit[oldCoords.x][oldCoords.y].condition = (int)Cell.conditionsList.exit;
-                this._exitPoint = new Point2D(oldCoords.x, oldCoords.y);
-                this._exitVector = new Point2D(-coordsIncrement.x, -coordsIncrement.y);
-                return;
-            }
-
-            
-
-            oldCoords.x = oldCoords.x + coordsIncrement.x;// x = i
-            oldCoords.y = oldCoords.y + coordsIncrement.y;
-
-            AddNewCell(oldCoords);
-            
-            trip = trip.Substring(1);
-            Step(trip, oldCoords, coordsIncrement);
-
-        }
 
         public string Encode()
         {

@@ -14,10 +14,10 @@ namespace SoEn_task_1
 
         public void StreamInit()
         {
-            sw = new StreamWriter("large_out.txt");
+            sw = new StreamWriter(Console.OpenStandardOutput());
             sw.AutoFlush = true;
             Console.SetOut(sw);
-            sr = new StreamReader("large_test.txt");
+            sr = new StreamReader("test.txt");
         }
 
         public void ParseFile()
@@ -29,20 +29,20 @@ namespace SoEn_task_1
 
             for(int i = 1;i < possibleLabyryths.Length; i++ )
             {
-                //try { 
+                try
+                {
                     var roads = possibleLabyryths[i].Split(' ');
-                    var lab = new Labyrinth();
+                    var lab = new LabyrinthCreator();
                     lab.Generate(roads[0],roads[1]);
 
                     sw.WriteLine("\r\nCase #"+i);
-                    sw.Write(lab.Encode());
+                    sw.Write(lab.labyrinth.Encode());
                     sw.Write("\n");
-                //}
-                //catch (Exception e)
-                //{
-                //    Console.WriteLine("error", e);
-                //    continue;
-                //}
+                }
+                catch (Exception e)
+                {
+                    continue;
+                }
             }
         }
 
